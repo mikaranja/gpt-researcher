@@ -10,13 +10,17 @@ services:
       LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY}
       LOGGING_LEVEL: INFO
     volumes:
-      - ${PWD}/my-docs:/usr/src/app/my-docs:rw
-      - ${PWD}/outputs:/usr/src/app/outputs:rw
-      - ${PWD}/logs:/usr/src/app/logs:rw
+      # - ${PWD}/my-docs:/usr/src/app/my-docs:rw
+      # - ${PWD}/outputs:/usr/src/app/outputs:rw
+      # - ${PWD}/logs:/usr/src/app/logs:rw
+      - ./my-docs:/usr/src/app/my-docs:rw
+      - ./outputs:/usr/src/app/outputs:rw
+      - ./logs:/usr/src/app/logs:rw
     user: root
     restart: always
     ports:
-      - 8000:8000
+      # - 8000:8000
+      - 8001:8000
       
   gptr-nextjs:
     pull_policy: build
@@ -31,9 +35,9 @@ services:
       dockerfile: Dockerfile.dev
       context: frontend/nextjs
     volumes:
-      - /app/node_modules
-      - ./frontend/nextjs:/app
-      - ./frontend/nextjs/.next:/app/.next
+      # - /app/node_modules
+      # - ./frontend/nextjs:/app
+      # - ./frontend/nextjs/.next:/app/.next
       - ./outputs:/app/outputs
     restart: always
     ports:
